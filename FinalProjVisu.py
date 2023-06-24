@@ -4,8 +4,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+import zipfile
 
-df = pd.read_csv(r'data.csv')
+zip_path = 'data.zip'
+csv_filename = 'data.csv'
+
+# Open the zip folder
+with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+    # Extract the CSV file from the zip folder
+    zip_ref.extract(csv_filename, path='.')
+
+# Read the extracted CSV file into a DataFrame
+df = pd.read_csv(csv_filename)
 
 st.title("My Streamlit Dashboard")
 
